@@ -14,7 +14,7 @@ ws [ \t\n]+
 {ws}           ;
 {data}        {yylval.stringa=strdup(yytext); return (DATA);}
 {parole}      {yylval.stringa=strdup(yytext); return(PAROLE);}
-{pettorina}   {yylval.stringa=strdup(yytext); return(PETTORINA);}
+{pettorina}   {yylval.intero=atoi(yytext); return(PETTORINA);}
 {codice}      {yylval.stringa=strdup(yytext); return(CODICE);}
 {d_tappa}     {yylval.stringa=strdup(yytext); return(D_TAPPA);}
 {ora_min_sec} {yylval.intero=atoi(yytext); return(ORA_MIN_SEC);}

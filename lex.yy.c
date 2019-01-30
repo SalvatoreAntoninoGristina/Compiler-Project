@@ -873,7 +873,7 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 17 "scanner.fl"
-{yylval.stringa=strdup(yytext); return(PETTORINA);}
+{yylval.intero=atoi(yytext); return(PETTORINA);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP

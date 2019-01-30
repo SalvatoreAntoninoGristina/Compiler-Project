@@ -13,23 +13,21 @@ ciclista *controllo=NULL;
 supporto *tmp=NULL;
 tratto *tratt_list=NULL;
 
-unsigned int hash(char *s){
+unsigned int hash(int s){
   int h=0;
-  for(;*s!='\0';s++){
-    h=(127*h+*s)%HASHSIZE;
-    }
+  h=(127*h+s)%HASHSIZE;
   return h;
 }
 
-ciclista *lookup(char *s){
+ciclista *lookup(int s){
   ciclista *c=NULL;
   for(c = hashtable[hash(s)]; c != NULL; c = c->next)
-    if(strcmp(s,c->pettorina) == 0)
+    if(s == c->pettorina)
       return c;
     return NULL;
 }
 
-ciclista *ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina){
+ciclista *ins_ciclista(char *codice, char *nome, char *squadra,int pettorina){
   ciclista *c=NULL;
   unsigned hashval;
   if ((c = lookup(pettorina))==NULL){
@@ -38,7 +36,7 @@ ciclista *ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina)
   c->codice = strdup(codice);
   c->nome = strdup(nome);
   c->squadra = strdup(squadra);
-  c->pettorina = strdup(pettorina);
+  c->pettorina = pettorina;
   n_ciclisti++;
   hashval = hash(pettorina);
   c->next = hashtable[hashval];
@@ -74,7 +72,7 @@ int ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   return 0;
 }
 
-supporto *ins_supporto(char *pettorina, int tempo){
+supporto *ins_supporto(int pettorina, int tempo){
 
   controllo = lookup(pettorina); //controllo è un puntatore globale che punta a ciclisti
 
@@ -87,7 +85,7 @@ supporto *ins_supporto(char *pettorina, int tempo){
       tmp = (supporto *)malloc(sizeof(*tmp));
       tmp->tempo_tratto = tempo;
       tmp->tempo_totale = tempo;
-      tmp->pettorina = strdup(pettorina);
+      tmp->pettorina = pettorina;
       tmp->next = current;
       current = tmp;
       k++;
@@ -95,7 +93,7 @@ supporto *ins_supporto(char *pettorina, int tempo){
     } //nell' if ci entreremo solo per la creazione della prima lista che poi sarà aggiornata nei prossimi inserimenti nel while
     else{
       while(current!=NULL){
-        if(strcmp(current->pettorina,pettorina)==0){
+        if(pettorina == current->pettorina){
           current->tempo_tratto = tempo;
           x++;
 
@@ -240,7 +238,7 @@ void swap_totale(supporto *a, supporto *b){
   a->tempo_tratto = b->tempo_tratto;
   b->tempo_tratto = temp_tratto;
 
-  char *temp2 = a->pettorina;
+  int temp2 = a->pettorina;
   a->pettorina = b->pettorina;
   b->pettorina = temp2;
 }
@@ -254,7 +252,7 @@ void swap_tratto(supporto *c, supporto *d){
   c->tempo_totale = d->tempo_totale;
   d->tempo_totale = temp1_totale;
 
-  char *temp3 = c->pettorina;
+  int temp3 = c->pettorina;
   c->pettorina = d->pettorina;
   d->pettorina = temp3;
 }

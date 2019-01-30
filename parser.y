@@ -9,8 +9,8 @@ void yyerror (char const*);
   int intero;
 }
 %error-verbose
-%token <stringa> DATA PAROLE CODICE D_TAPPA PETTORINA
-%token <intero> ORA_MIN_SEC
+%token <stringa> DATA PAROLE CODICE D_TAPPA
+%token <intero> ORA_MIN_SEC PETTORINA
 %token DPN SEP1 SEP2 SEP3 TRAT ARR PARA PARC VIR
 %start Input
 %%
