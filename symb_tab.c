@@ -54,6 +54,14 @@ tratto *ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   tratto *t;
   t = (tratto *)malloc(sizeof(*t));
 
+  /*while(tratt_list!=NULL){
+  	if(tratt_list->next!=NULL){
+  		if(strcmp(tratt_list->citta_a,tratt_list->next->citta_p)!=0){
+  			printf("")
+		  }
+	  }
+  }*/
+
   t->data = data;
   t->citta_p = c_partenza;
   t->citta_a = c_arrivo;
@@ -133,7 +141,7 @@ void print_res(){
   char *nome;
   char *data_tratto = tratt_list->data;
 	ordina_tratto(current);
- 	printf("Classifica corrente data: %s\n\n",data_tratto);
+ 	printf("Classifica corrente Data: %s\n ",data_tratto);
 
 	while(current!=NULL){
     	controllo=lookup(current->pettorina);
@@ -151,7 +159,7 @@ void print_res(){
   	}
   	current=tmp;
     ordina_totale(current);
-   	printf("\n\nClassifica Generale:\n\n");
+   	printf("\nClassifica Generale:\n");
 
    	while(current!=NULL){
    	 	controllo=lookup(current->pettorina);
@@ -248,7 +256,7 @@ void swap_tratto(supporto *c, supporto *d){
   d->pettorina = temp3;
 }
 
-void bonus_posizione(supporto *current){
+bonus_posizione(current){
   supporto *bp = current;
 
   if(controllo_bonus == 0){
