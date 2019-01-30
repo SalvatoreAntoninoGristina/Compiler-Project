@@ -27,9 +27,9 @@ typedef struct t{
 
 
 ciclista *hashtable[HASHSIZE];
-unsigned int hash(int s);
 ciclista *lookup(int s);
-ciclista *ins_ciclista(char *codice, char *nome, char *squadra, int pettorina);
+unsigned int hash(int s);
+int ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina);
 int ins_tratto(char *data, char *c_partenza, char *c_arrivo);
 supporto *ins_supporto(int pettorina, int tempo);
 void ordina_totale(supporto *start);

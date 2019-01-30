@@ -18,7 +18,6 @@ unsigned int hash(int s){
   h=(127*h+s)%HASHSIZE;
   return h;
 }
-
 ciclista *lookup(int s){
   ciclista *c=NULL;
   for(c = hashtable[hash(s)]; c != NULL; c = c->next)
@@ -27,39 +26,36 @@ ciclista *lookup(int s){
     return NULL;
 }
 
-ciclista *ins_ciclista(char *codice, char *nome, char *squadra,int pettorina){
+int ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina){
   ciclista *c=NULL;
-  unsigned hashval;
-  if ((c = lookup(pettorina))==NULL){
-    if((c = (ciclista *)malloc(sizeof(*c)))==NULL)
-      return NULL;
-  c->codice = strdup(codice);
-  c->nome = strdup(nome);
-  c->squadra = strdup(squadra);
-  c->pettorina = pettorina;
-  n_ciclisti++;
-  hashval = hash(pettorina);
-  c->next = hashtable[hashval];
-  hashtable[hashval] = c;
-  }
+ }
+   unsigned hashval;
+   if ((c = lookup(pettorina))==NULL){
+     if((c = (ciclista *)malloc(sizeof(*c)))==NULL)
+       return NULL;
+   c->codice = strdup(codice);
+   c->nome = strdup(nome);
+   c->squadra = strdup(squadra);
+   c->pettorina = pettorina;
+   n_ciclisti++;
+   hashval = hash(pettorina);
+   c->next = hashtable[hashval];
+   hashtable[hashval] = c;
   else{
-  	printf("ERRORE, PETTORINA GIA INSERITA");
+
+    return 0;
   }
-  return c;
+  return 1;
 }
 
 int ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   tratto *t;
   t = (tratto *)malloc(sizeof(*t));
-
-
   if((n_tratti>0) && (strcmp(tratt_list->citta_a, c_partenza))!=0){
-  	printf("\n ERRORE CITTA PARTENZA DIVERSA CITTA ARRIVO");
-  	return 1;
+  		return 0;
   }
   if((n_tratti>0) && (strcmp(tratt_list->data, data))==0){
-  	printf("\n ERRORE DATE UGUALI");
-  	return 2;
+  		return 1;
   }
 
   t->data = data;
@@ -69,7 +65,7 @@ int ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   t->s = current;
   t->next = tratt_list;
   tratt_list = t;
-  return 0;
+  return 2;
 }
 
 supporto *ins_supporto(int pettorina, int tempo){
@@ -77,7 +73,8 @@ supporto *ins_supporto(int pettorina, int tempo){
   controllo = lookup(pettorina); //controllo è un puntatore globale che punta a ciclisti
 
   if(controllo == NULL){
-    printf(" ERRORE :Pettorina non trovata.\n" );
+
+    return NULL;
   }
   else{
     if(k<n_ciclisti){ //n_ciclisti  è una variabile globale che viene aumentanta ogni volta che viene
