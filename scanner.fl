@@ -1,0 +1,31 @@
+%{
+#include <stdio.h>
+#include "parser.tab.h"
+%}
+%option noyywrap
+parole [A-Z][A-Za-zàèìòù ]+
+data ([0-2][0-9]|3[0-1])[ ](Gennaio|Febbraio|Marzo|Aprile|Maggio|Giugno|Luglio|Agosto|Settembre|Ottobre|Novembre|Dicembre)[ ]([1-9][0-9]{3})
+codice [A-Z]{2}+[0-9]{4}+[A-Z]
+pettorina [0-9]{3}
+d_tappa ([0-2][1-9]|3[0-1])+"/"+((0[1-9])|(1[0-2]))
+ora_min_sec (0[0-9])|([1-5][0-9])|60
+ws [ \t\n]+
+%%
+{ws}           ;
+{data}        {yylval.stringa=strdup(yytext); return (DATA);}
+{parole}      {yylval.stringa=strdup(yytext); return(PAROLE);}
+{pettorina}   {yylval.stringa=strdup(yytext); return(PETTORINA);}
+{codice}      {yylval.stringa=strdup(yytext); return(CODICE);}
+{d_tappa}     {yylval.stringa=strdup(yytext); return(D_TAPPA);}
+{ora_min_sec} {yylval.intero=atoi(yytext); return(ORA_MIN_SEC);}
+"//".*\n    ;
+":"         {return(DPN);}
+">>>>>"     {return(SEP1);}
+"&&&"       {return(SEP2);}
+"<<<<<"     {return(SEP3);}
+"-"         {return(TRAT);}
+"->"        {return(ARR);}
+"("         {return(PARA);}
+")"         {return(PARC);}
+","         {return(VIR);}
+%%

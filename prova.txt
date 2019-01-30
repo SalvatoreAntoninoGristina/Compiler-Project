@@ -1,0 +1,13 @@
+23 Maggio 2018
+>>>>>
+(PQ3274Z,Giovanni Battista Amato,Libertas CT,215)
+(PM4285Q,Peitro Magri, ASD Ciclismo PA,357)
+(AP8242A,Marco Bonanno,Libertas CT,818)
+(AZ6813Y,Massimo Bonelli,Palermo Ciclismo,203)
+(BY9532R,Antonio Maria Cusimano,Palermo Ciclismo,613)
+(CA4794T,Paolo Di Blasi,Sporting club,418)
+(PN1137N,Manfredi Terranova,ASD Cefalù,206)
+&&&
+<<<<<
+22/05-Palermo-Cefalù-(203:02:42:30)->(215:02:42:53)->(206:02:43:15)->(613:02:43:16)->(418:02:43:21)->(357:02:44:02)->(818:02:44:50)
+23/05-Cefalù-Messina-(215:03:55:34)->(613:03:55:34)->(206:03:55:50)->(418:03:55:52)->(203:03:56:48)->(818:03:57:10)->(357:03:58:30)
