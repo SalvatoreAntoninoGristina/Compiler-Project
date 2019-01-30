@@ -8,6 +8,15 @@ typedef struct c{
   struct c *next;
 }ciclista;
 
+typedef struct s{
+  int tempo_tratto;
+  int tempo_totale;
+  char *pettorina;
+  ciclista *c;
+  struct s *next;
+}supporto;
+
+
 typedef struct t{
   char *data;
   char *citta_p;
@@ -16,13 +25,6 @@ typedef struct t{
   struct t *next;
 }tratto;
 
-typedef struct s{
-  int tempo_tratto;
-  int tempo_totale;
-  char *pettorina;
-  ciclista *c;
-  struct s *next;
-}supporto;
 
 ciclista *hashtable[HASHSIZE];
 unsigned int hash(char *s);
