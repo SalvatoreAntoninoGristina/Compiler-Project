@@ -23,12 +23,11 @@ Sezione1: L_ciclisti
 L_ciclisti: Ciclisti
   | Ciclisti L_ciclisti
   ;
-Ciclisti: PARA CODICE VIR PAROLE VIR PAROLE VIR PETTORINA PARC {
-if((ins_ciclista($2,$4,$6,$8))==0){
+Ciclisti: PARA CODICE VIR PAROLE VIR PAROLE VIR PETTORINA PARC
+{if((ins_ciclista($2,$4,$6,$8))==1){
   yyerror("ERRORE, PETTORINA GIA INSERITA...");
-  YYABORT;
-  }
-  }
+  YYABORT;}
+}
   ;
 Sezione2: L_tratti
   ;
@@ -71,7 +70,7 @@ if((ins_supporto($2,(($4*3600)+($6*60)+$8)))==NULL){
   ;
 %%
 void yyerror (char const *s){
-  fprintf(stderr, "%s\n",s);
+  printf("%s\n",s);
 }
 int main(){
   if(yyparse() == 0){

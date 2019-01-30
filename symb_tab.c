@@ -26,13 +26,12 @@ ciclista *lookup(int s){
     return NULL;
 }
 
-int ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina){
+int ins_ciclista(char *codice, char *nome, char *squadra, int pettorina){
   ciclista *c=NULL;
- }
    unsigned hashval;
    if ((c = lookup(pettorina))==NULL){
      if((c = (ciclista *)malloc(sizeof(*c)))==NULL)
-       return NULL;
+       return 0;
    c->codice = strdup(codice);
    c->nome = strdup(nome);
    c->squadra = strdup(squadra);
@@ -41,11 +40,12 @@ int ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina){
    hashval = hash(pettorina);
    c->next = hashtable[hashval];
    hashtable[hashval] = c;
+ }
   else{
 
-    return 0;
+    return 1;
   }
-  return 1;
+  return 2;
 }
 
 int ins_tratto(char *data, char *c_partenza, char *c_arrivo){
@@ -90,7 +90,7 @@ supporto *ins_supporto(int pettorina, int tempo){
     } //nell' if ci entreremo solo per la creazione della prima lista che poi sarà aggiornata nei prossimi inserimenti nel while
     else{
       while(current!=NULL){
-        if(pettorina == current->pettorina){
+        if(pettorina==current->pettorina){
           current->tempo_tratto = tempo;
           x++;
 

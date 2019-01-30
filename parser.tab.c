@@ -448,8 +448,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    17,    17,    19,    21,    23,    24,    26,    28,    30,
-      31,    33,    35,    36,    38
+       0,    17,    17,    19,    21,    23,    24,    26,    32,    34,
+      35,    37,    55,    56,    58
 };
 #endif
 
@@ -1241,25 +1241,55 @@ yyreduce:
   switch (yyn)
     {
         case 7:
-#line 26 "parser.y" /* yacc.c:1646  */
-    {ins_ciclista((yyvsp[-7].stringa),(yyvsp[-5].stringa),(yyvsp[-3].stringa),(yyvsp[-1].intero));}
-#line 1247 "parser.tab.c" /* yacc.c:1646  */
+#line 27 "parser.y" /* yacc.c:1646  */
+    {if((ins_ciclista((yyvsp[-7].stringa),(yyvsp[-5].stringa),(yyvsp[-3].stringa),(yyvsp[-1].intero)))==1){
+  yyerror("ERRORE, PETTORINA GIA INSERITA...");
+  YYABORT;}
+}
+#line 1250 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 33 "parser.y" /* yacc.c:1646  */
-    {ins_tratto((yyvsp[-6].stringa),(yyvsp[-4].stringa),(yyvsp[-2].stringa));}
-#line 1253 "parser.tab.c" /* yacc.c:1646  */
+#line 37 "parser.y" /* yacc.c:1646  */
+    {
+
+  switch(ins_tratto((yyvsp[-6].stringa),(yyvsp[-4].stringa),(yyvsp[-2].stringa))){
+    case 0:
+    yyerror("ERRORE CITTA PARTENZA DIVERSA CITTA ARRIVO...");
+    YYABORT;
+    break;
+
+    case 1:
+    yyerror("ERRORE DATE UGUALI...");
+    YYABORT;
+    break;
+
+    default:
+    break;
+    }
+}
+#line 1272 "parser.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 38 "parser.y" /* yacc.c:1646  */
-    {ins_supporto((yyvsp[-7].intero),(((yyvsp[-5].intero)*3600)+((yyvsp[-3].intero)*60)+(yyvsp[-1].intero)));}
-#line 1259 "parser.tab.c" /* yacc.c:1646  */
+#line 58 "parser.y" /* yacc.c:1646  */
+    {
+
+if((yyvsp[-5].intero)<0||(yyvsp[-3].intero)<0||(yyvsp[-1].intero)<0){
+  yyerror("IL TEMPO DELLE TRATTE DEVE ESSERE MAGGIORE DI 0...");
+  YYABORT;
+}
+if((ins_supporto((yyvsp[-7].intero),(((yyvsp[-5].intero)*3600)+((yyvsp[-3].intero)*60)+(yyvsp[-1].intero))))==NULL){
+  yyerror("PETTORINA NON TROVATA NELLA LISTA DEI CICLISTI...");
+  YYABORT;
+}
+
+}
+#line 1289 "parser.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1263 "parser.tab.c" /* yacc.c:1646  */
+#line 1293 "parser.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1487,10 +1517,10 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 40 "parser.y" /* yacc.c:1906  */
+#line 71 "parser.y" /* yacc.c:1906  */
 
 void yyerror (char const *s){
-  fprintf(stderr, "%s\n",s);
+  printf("%s\n",s);
 }
 int main(){
   if(yyparse() == 0){
