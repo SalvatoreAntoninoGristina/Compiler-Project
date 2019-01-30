@@ -54,17 +54,16 @@ tratto *ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   tratto *t;
   t = (tratto *)malloc(sizeof(*t));
 
-  /*while(tratt_list!=NULL){
-  	if(tratt_list->next!=NULL){
-  		if(strcmp(tratt_list->citta_a,tratt_list->next->citta_p)!=0){
-  			printf("")
-		  }
-	  }
-  }*/
+
+  if((n_tratti>0) && (strcmp(tratt_list->citta_a, c_partenza))!=0){
+  	printf("\n ERRORE CITTA PARTENZA DIVERSA CITTA ARRIVO");
+  	return NULL;
+  }
 
   t->data = data;
   t->citta_p = c_partenza;
   t->citta_a = c_arrivo;
+  n_tratti++;
   t->s = current;
   t->next = tratt_list;
   tratt_list = t;
@@ -256,7 +255,7 @@ void swap_tratto(supporto *c, supporto *d){
   d->pettorina = temp3;
 }
 
-bonus_posizione(current){
+void bonus_posizione(supporto *current){
   supporto *bp = current;
 
   if(controllo_bonus == 0){
