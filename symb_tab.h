@@ -4,14 +4,14 @@ typedef struct c{
   char *codice;
   char *nome;
   char *squadra;
-  int pettorina;
+  char *pettorina;
   struct c *next;
 }ciclista;
 
 typedef struct s{
   int tempo_tratto;
   int tempo_totale;
-  int pettorina;
+  char *pettorina;
   ciclista *c;
   struct s *next;
 }supporto;
@@ -29,9 +29,9 @@ typedef struct t{
 ciclista *hashtable[HASHSIZE];
 unsigned int hash(int s);
 ciclista *lookup(int s);
-ciclista *ins_ciclista(char *codice, char *nome, char *squadra, int pettorina);
+int ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina);
 int ins_tratto(char *data, char *c_partenza, char *c_arrivo);
-supporto *ins_supporto(int pettorina, int tempo);
+supporto *ins_supporto(char *pettorina, int tempo);
 void ordina_totale(supporto *start);
 void swap_totale(supporto *a, supporto *b);
 void ordina_tratto(supporto *start);
