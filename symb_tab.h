@@ -30,7 +30,7 @@ ciclista *hashtable[HASHSIZE];
 unsigned int hash(char *s);
 ciclista *lookup(char *s);
 ciclista *ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina);
-tratto *ins_tratto(char *data, char *c_partenza, char *c_arrivo);
+int ins_tratto(char *data, char *c_partenza, char *c_arrivo);
 supporto *ins_supporto(char *pettorina, int tempo);
 void ordina_totale(supporto *start);
 void swap_totale(supporto *a, supporto *b);

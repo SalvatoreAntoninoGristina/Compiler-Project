@@ -50,14 +50,18 @@ ciclista *ins_ciclista(char *codice, char *nome, char *squadra, char *pettorina)
   return c;
 }
 
-tratto *ins_tratto(char *data, char *c_partenza, char *c_arrivo){
+int ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   tratto *t;
   t = (tratto *)malloc(sizeof(*t));
 
 
   if((n_tratti>0) && (strcmp(tratt_list->citta_a, c_partenza))!=0){
   	printf("\n ERRORE CITTA PARTENZA DIVERSA CITTA ARRIVO");
-  	return NULL;
+  	return 1;
+  }
+  if((n_tratti>0) && (strcmp(tratt_list->data, data))==0){
+  	printf("\n ERRORE DATE UGUALI");
+  	return 2;
   }
 
   t->data = data;
@@ -67,7 +71,7 @@ tratto *ins_tratto(char *data, char *c_partenza, char *c_arrivo){
   t->s = current;
   t->next = tratt_list;
   tratt_list = t;
-  return t;
+  return 0;
 }
 
 supporto *ins_supporto(char *pettorina, int tempo){
